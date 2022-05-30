@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Header from './Header';
 import TodoList from './TodoList';
 import InputTodo from './InputTodo';
+import Navbar from './Navbar';
+import About from '../pages/About';
+import NotMatch from '../pages/NotMatch';
 
 const TodoContainer = () => {
   const [todos, setTodos] = useState(getInitialTodos());
@@ -37,18 +41,14 @@ const TodoContainer = () => {
   const addTodoItem = (title) => {
     const newTodo = {
       id: uuidv4(),
-      title: title,
+      title,
       completed: false,
     };
     setTodos([...todos, newTodo]);
   };
 
   const delTodo = (id) => {
-    setTodos([
-      ...todos.filter((todo) => {
-        return todo.id !== id;
-      }),
-    ]);
+    setTodos([...todos.filter((todo) => todo.id !== id)]);
   };
 
   const setUpdate = (updatedTitle, id) => {
@@ -63,18 +63,31 @@ const TodoContainer = () => {
   };
 
   return (
-    <div className="container">
-      <div className="inner">
-        <Header />
-        <InputTodo addTodoProps={addTodoItem} />
-        <TodoList
-          todos={todos}
-          handleChangeProps={handleChange}
-          deleteTodoProps={delTodo}
-          setUpdate={setUpdate}
+    <>
+      <Navbar />
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <div className="container">
+              <div className="inner">
+                <Header />
+                <InputTodo addTodoProps={addTodoItem} />
+                <TodoList
+                  todos={todos}
+                  handleChangeProps={handleChange}
+                  deleteTodoProps={delTodo}
+                  setUpdate={setUpdate}
+                />
+              </div>
+            </div>
+          }
         />
-      </div>
-    </div>
+        <Route path="/about/*" element={<About />} />
+        <Route path="*" element={<NotMatch />} />
+      </Routes>
+    </>
   );
 };
 export default TodoContainer;

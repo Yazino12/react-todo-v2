@@ -5,11 +5,12 @@ import styles from './TodoItem.module.css';
 const TodoItem = (props) => {
   const [editing, setEditing] = useState(false);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       console.log('Cleaning up...');
-    };
-  }, []);
+    },
+    []
+  );
 
   const handleEditing = () => {
     setEditing(true);
@@ -29,8 +30,8 @@ const TodoItem = (props) => {
   };
   const { completed, id, title } = props.todo;
 
-  let viewMode = {};
-  let editMode = {};
+  const viewMode = {};
+  const editMode = {};
 
   if (editing) {
     viewMode.display = 'none';
