@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { PropTypes } from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
   const [editing, setEditing] = useState(false);
+  const {
+    todos, handleChangeProps, deleteTodoProps, setUpdate,
+  } = props;
 
   useEffect(
     () => () => {
       console.log('Cleaning up...');
     },
-    []
+    [],
   );
 
   const handleEditing = () => {
@@ -28,7 +32,7 @@ const TodoItem = (props) => {
     opacity: 0.4,
     textDecoration: 'line-through',
   };
-  const { completed, id, title } = props.todo;
+  const { completed, id, title } = todos;
 
   const viewMode = {};
   const editMode = {};
@@ -46,9 +50,9 @@ const TodoItem = (props) => {
           type="checkbox"
           className={styles.checkbox}
           checked={completed}
-          onChange={() => props.handleChangeProps(id)}
+          onChange={() => handleChangeProps(id)}
         />
-        <button onClick={() => props.deleteTodoProps(id)}>
+        <button onClick={() => deleteTodoProps(id)} type="submit">
           <FaTrash style={{ color: 'orangered', fontSize: '16px' }} />
         </button>
         <span style={completed ? completedStyle : null}>{title}</span>
@@ -59,11 +63,31 @@ const TodoItem = (props) => {
         className={styles.textInput}
         value={title}
         onChange={(e) => {
-          props.setUpdate(e.target.value, id);
+          setUpdate(e.target.value, id);
         }}
         onKeyDown={handleUpdatedDone}
       />
     </li>
   );
 };
+
+TodoItem.defaultProps = {
+  todos: [],
+};
+
+TodoItem.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.shape({
+        completed: PropTypes.bool.isRequired,
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+      }),
+    ),
+  ),
+  handleChangeProps: PropTypes.func.isRequired,
+  deleteTodoProps: PropTypes.func.isRequired,
+  setUpdate: PropTypes.func.isRequired,
+};
+
 export default TodoItem;

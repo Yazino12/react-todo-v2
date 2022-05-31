@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
 import { FaPlusCircle } from 'react-icons/fa';
 
 const InputTodo = (props) => {
   const [inputText, setInputText] = useState({
     title: '',
   });
+  const { addTodoProps } = props;
 
   const onChange = (e) => {
     setInputText({
@@ -16,7 +18,7 @@ const InputTodo = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText.title.trim()) {
-      props.addTodoProps(inputText.title);
+      addTodoProps(inputText.title);
       setInputText({
         title: '',
       });
@@ -35,7 +37,7 @@ const InputTodo = (props) => {
         name="title"
         onChange={onChange}
       />
-      <button className="input-submit">
+      <button className="input-submit" type="submit">
         <FaPlusCircle
           style={{ color: 'darkcyan', fontSize: '20px', marginTop: '2px' }}
         />
@@ -43,4 +45,9 @@ const InputTodo = (props) => {
     </form>
   );
 };
+
+InputTodo.propTypes = {
+  addTodoProps: PropTypes.func.isRequired,
+};
+
 export default InputTodo;
