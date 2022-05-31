@@ -2,7 +2,7 @@
 
 # React Todo
 
-> o do app! This tutorial, covers all main concepts about React, divided into several parts, is very comprehensive, and covers all main concepts about React, from the very basics to some intermediate topics.
+> React to do app! This tutorial, covers all main concepts about React, divided into several parts, is very comprehensive, and covers all main concepts about React, from the very basics to some intermediate topics.
 
 ## Built With
 
