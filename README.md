@@ -41,11 +41,13 @@ To get a local copy up and running follow these setup steps.
 
 - Link here: [Github-Pages](https://yazino12.github.io/react-todo-v2/)
 
-## Authors
+## Author
 
-👤 **Yasin**
+👤 **Yasin Warsame**
 
 - GitHub: [@Yazino12](https://github.com/Yazino12)
+- Twitter: [@yasino24](https://twitter.com/yasino24)
+- LinkedIn: [yasin-warsame](https://linkedin.com/in/yasin-warsame-a4176217a)
 
 ## 🤝 Contributing
 
